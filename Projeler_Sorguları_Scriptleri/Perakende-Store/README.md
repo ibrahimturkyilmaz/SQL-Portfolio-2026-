@@ -16,6 +16,25 @@
 **İbrahim Türkyılmaz** - Endüstri Mühendisliği Öğrencisi
 
 ---
+> **📉 Analiz Örneği: Zarar Raporu**
+> Aşağıdaki grafik, veritabanından çekilen verilerle oluşturulan bölgesel zarar analizini göstermektedir.
+>
+> ![SuperStore Zarar Raporu](./img/1-SuperStoreDataset-zarar-raporu.png)
+>
+> *Bu analizde görüldüğü üzere, belirli alt kategorilerde (Tables vb.) negatif kârlılık tespit edilmiştir.*
+
+> **👥 Analiz Örneği: Müşteri Segmentasyonu**
+> RFM skorlarına göre müşterilerin sadakat gruplarına ayrılması.
+>
+> ![Müşteri Segmentasyonu](./img/1-online-retail2-müşteri-segmentleme.png)
+
+> **🏭 Analiz Örneği: Ürün Segmentasyonu & Tedarikçi Performansı**
+>
+> | Ürün Segmentasyonu (ABC) | Tedarikçi Performansı |
+> | :---: | :---: |
+> | ![Ürün Segmentasyonu](./img/1-adventureworks-ürün-segmentleme.png) | ![Tedarikçi Performansı](./img/2-adventureworks-tedarikci-performans-yorumu.png) |
+
+
 
 ## 📂 Projeler ve İş Senaryoları
 
