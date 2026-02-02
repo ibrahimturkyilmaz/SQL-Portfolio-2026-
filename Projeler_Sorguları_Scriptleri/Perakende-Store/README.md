@@ -20,7 +20,7 @@ Bu depo, \*\*SuperStore\*\*, \*\*Online Retail\*\* ve \*\*AdventureWorks\*\* ver
 
 Veri okuryazarlığı ve temel raporlama yetkinlikleri.
 
-*\*\*Kârlılık Analizi:\*\* Zarar eden bölgelerin ve ürünlerin tespiti.
+***Kârlılık Analizi:\*\* Zarar eden bölgelerin ve ürünlerin tespiti.
 
 *\*\*KPI Raporlama:\*\* Bölgesel satış performansları ve trend analizleri.
 
@@ -42,19 +42,19 @@ Müşteri davranışlarını anlamak ve segmentasyon.
 
 Endüstri Mühendisliği problemlerine SQL çözümleri.
 
-*\*\*ABC Stok Analizi:\*\* Envanter yönetiminde Pareto (80/20) prensibinin uygulanması.
+***ABC Stok Analizi:\*\* Envanter yönetiminde Pareto (80/20) prensibinin uygulanması.
 
-*\*\*Vendor Rating:\*\* Tedarikçilerin termin süresi ve kalite (fire oranı) performanslarının ölçülmesi.
+***Vendor Rating:\*\* Tedarikçilerin termin süresi ve kalite (fire oranı) performanslarının ölçülmesi.
 
-*\*\*BOM (Bill of Materials):\*\* Recursive CTE kullanılarak ürün ağaçlarının alt parçalarına inilmesi.
+***BOM (Bill of Materials):\*\* Recursive CTE kullanılarak ürün ağaçlarının alt parçalarına inilmesi.
 
 
 
 ## 🛠 Yetkinlikler
 
-*\*\*T-SQL\*\* (Window Functions, CTE, Recursive Queries)
+***T-SQL\*\* (Window Functions, CTE, Recursive Queries)
 
-*\*\*Veri Temizliği \& Manipülasyonu\*\*
+***Veri Temizliği \& Manipülasyonu\*\*
 
-*\*\*İlişkisel Veritabanı Yönetimi\*\*
+***İlişkisel Veritabanı Yönetimi\*\*
 
