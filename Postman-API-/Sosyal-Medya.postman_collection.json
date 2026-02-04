@@ -1,0 +1,90 @@
+{
+  "info": {
+    "_postman_id": "f0436e2d-df0d-4fdc-9cfd-32b96f574eec",
+    "name": "Sosyal-Medya",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52096731",
+    "_collection_link": "https://go.postman.co/collection/52096731-f0436e2d-df0d-4fdc-9cfd-32b96f574eec?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "PostCekme",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/posts",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "posts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PostAtma",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\r\n    \"title\": \"DENEME İBRAHİM\",\r\n    \"body\": \"POSTMAN ÖĞRENDİM\",\r\n    \"userId\": 101\r\n  }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/posts",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "posts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userId\": 1,\r\n    \"id\": 1,\r\n    \"title\": \"düzenleme: DENEME İBRAHİM\",\r\n    \"body\": \"düzenleme: POSTMAN ÖĞRENDİM\"\r\n\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/posts/1",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "posts",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
