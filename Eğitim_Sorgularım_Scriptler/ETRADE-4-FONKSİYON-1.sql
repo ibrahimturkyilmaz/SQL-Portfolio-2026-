@@ -1,0 +1,79 @@
+create function dbo.gettotalamount(@ITEMID AS INT)
+returns int
+as begin
+declare @result as int
+select @result = sum(amount) from ORDERDETAILS where ITEMID = @ITEMID
+RETURN  @result
+end
+
+create function dbo.gettotasale(@ITEMID AS INT)
+returns int
+as begin
+declare @result as int
+select @result = sum(LINETOTAL) from ORDERDETAILS where ITEMID = @ITEMID
+RETURN  @result
+end
+
+create function dbo.getminprice(@ITEMID AS INT)
+returns int
+as begin
+declare @result as int
+select @result = min(UNITPRICE) from ORDERDETAILS where ITEMID = @ITEMID
+RETURN  @result
+end
+
+create function dbo.getmaxprice(@ITEMID AS INT)
+returns int
+as begin
+declare @result as int
+select @result = max(UNITPRICE) from ORDERDETAILS where ITEMID = @ITEMID
+RETURN  @result
+end
+
+create function dbo.getavgprice(@ITEMID AS INT)
+returns int
+as begin
+declare @result as int
+select @result = avg(UNITPRICE) from ORDERDETAILS where ITEMID = @ITEMID
+RETURN  @result
+end
+
+--INLINE TABLE
+CREATE FUNCTION DBO.ITEMINFO2 (	@ITEMID INT)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	SELECT I.ID, I.ITEMNAME, 
+	SUM(O.AMOUNT) AS TOTALAMIUNT, MIN(O.UNITPRICE) MINPRICE, MAX(O.UNITPRICE) MAXPRICE, avg(O.UNITPRICE) avgprice
+	FROM ITEMS I
+	JOIN ORDERDETAILS O ON O.ITEMID = I.ID
+	where I.ID = @ITEMID
+	group by I.ID, I.ITEMCODE, I.ITEMNAME
+	)
+GO
+
+
+
+--MULTI TABLE
+CREATE FUNCTION DBO. ITEMINFO3 (@ITEMID INT)
+
+RETURNS
+@RESULT TABLE
+(
+ID INT,ITEMCODE VARCHAR(50), ITEMNAME VARCHAR(100), TOTALAMOUNT INT, TOTALSALE FLOAT,
+MINPRICE FLOAT, MAXPRICE FLOAT, AVGPRICE FLOAT
+)
+AS
+BEGIN
+
+INSERT INTO @RESULT(ID, ITEMCODE, ITEMNAME, TOTALAMOUNT, TOTALSALE, MINPRICE, MAXPRICE, AVGPRICE)
+SELECT I.ID,I.ITEMCODE, I. ITEMNAME, SUM(O.AMOUNT) TOTALAMOUNT, SUM(O. LINETOTAL) TOTALSALE ,
+MIN(O.UNITPRICE) MINPRICE,MAX(O.UNITPRICE) MAXPRICE, AVG(O.UNITPRICE) AVGPRICE
+FROM ITEMS I
+JOIN ORDERDETAILS O ON O.ITEMID=I.ID
+WHERE I.ID= @ITEMID
+GROUP BY I.ID, I.ITEMCODE, I.ITEMNAME
+RETURN
+END
+GO
