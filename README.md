@@ -1,81 +1,108 @@
 <div align="center">
 
 # 🚀 SQL-Portfolio-2026
+### Veri Mühendisliği & İş Zekası Mimarisi
+*Endüstri Mühendisliği Vizyonuyla: Ham Veriden Stratejik İçgörüye*
 
-**MS SQL - SQL Yönetimi ve Veri Analiz Projeleri**
-
-<p>
-  <b>Endüstri Mühendisliği Bakış Açısıyla Veri Analizi ve Veritabanı Yönetimi</b>
-</p>
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/ibrahim-turkyilmaz-68a188253/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ibrahim-turkyilmaz-68a188253/)
+![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Active_Development-success?style=for-the-badge)
 
 </div>
 
 ---
 
-## 📖 Hakkında
-Bu depo, **SQL Server (T-SQL)** yetkinliklerimi sergilediğim, gerçek hayat senaryolarına dayalı veritabanı projelerimi ve analiz çalışmalarımı içermektedir.
+## 📌 Yönetici Özeti (Executive Summary)
 
-> **🎯 Odak Noktası:** Ham veriyi işlenebilir bilgiye dönüştürerek; maliyet analizi, süreç optimizasyonu ve karar destek sistemleri oluşturmak.
+Bu depo, standart sorgu yazımının ötesine geçerek; **gerçek hayat senaryolarına dayalı veri mimarisi kurmayı** ve ham veriyi C-Level yöneticiler için **stratejik karar destek mekanizmalarına** dönüştürmeyi hedefler.
 
----
+Bir **Endüstri Mühendisi** olarak odak noktam sadece kodun çalışması değil; **süreç optimizasyonu, maliyet analizi, veri bütünlüğü ve darboğaz (bottleneck) tespitidir.**
 
-## 🏆 Sertifikalar & Yetkinlikler
-
-✅ **Sertifika:** BTK Akademi Ömer Çolakoğlu Uygulamalarla SQL Öğreniyorum Eğitim Kampı Başarı Sertifikası (Ocak 2026)
-
-### Teknik Yetkinlikler
-* **Veritabanı Tasarımı:** İlişkisel Veritabanı Tasarımı (Normalization, ER Diagrams)
-* **T-SQL Geliştirme:** Joins, Subqueries, CTEs, Window Functions
-* **Veri Yönetimi:** Veri Bütünlüğü ve Performans (Constraints, Indexes)
-* **İleri Seviye:** Stored Procedures & Triggers *(Geliştirme aşamasında)*
-
----
-
-## 📂 Öne Çıkan Projeler
-
-Bu depoda yer alan çalışmalar aşağıdaki ana başlıklar altında toplanmıştır. Klasörlere gitmek için başlıklara tıklayabilirsiniz.
-
-### 1. [🏭 E-Ticaret Veritabanı Mimarisi (Tamamlandı)](./Perakende-Store)
-*Sıfırdan bir e-ticaret platformunun veritabanı altyapısının kurulması.*
-* **Kapsam:** Müşteri, Sipariş, Ürün ve Stok tablolarının ilişkisel modellenmesi (PK/FK).
-* **Teknik Detay:** CRUD işlemleri ve veri tutarlılığı senaryoları.
-* **Veri Seti:** SQL_Egitim_Kamp_TatilDE (Custom Dataset)
-
-### 2. [📉 Superstore Zarar Önleme Analizi (Aktif)](./Perakende-Store)
-*Global bir perakende veri seti üzerinde finansal kayıpların tespiti (PROMASTER Seviye 1).*
-* **Hedef:** Şirketin karlılığını düşüren alt kategorilerin ve bölgelerin tespiti.
-* **Yöntem:** `GROUP BY`, `HAVING` ve `CASE WHEN` yapıları ile zarar marjı hesaplama.
-* **Durum:** 🟡 Geliştirme Aşamasında
-
-### 3. [💸 FinTech & Sigorta Analitiği](./FinTech%20&%20InsurTech)
-*Bankacılık ve Sigortacılık alanında ileri seviye risk ve churn analizleri.*
-* **Bankacılık:** Müşteri Terk (Churn) analizi ve Kampanya yönetimi.
-* **Sigorta:** Aktüeryal fiyatlandırma ve Fraud (Sahtecilik) tespiti.
-
----
-
-## 🛠️ Teknoloji Yığını (Tech Stack)
-
-| Kategori | Araçlar |
+| 🛠️ Kullanılan Araçlar | 📍 Odak Alanları |
 | :--- | :--- |
-| **Veritabanı** | Microsoft SQL Server |
-| **IDE / Tool** | SSMS (SQL Server Management Studio) |
-| **Versiyon Kontrol** | Git & GitHub Desktop |
-| **Görselleştirme** | *(Yakında eklenecek: Power BI)* |
+| **SSMS 19** (Geliştirme) | Veri Modelleme & Normalizasyon |
+| **T-SQL** (Advanced) | Performans Optimizasyonu |
+| **Git & GitHub** (Versiyon) | İş Zekası (BI) Raporlama |
 
 ---
 
-## 📈 Gelişim Yol Haritası
+## 📂 Proje Matrisi (Portfolio Matrix)
 
-- [x] **Faz 1:** SQL Temelleri, Tablo Tasarımı ve Veri Manipülasyonu
-- [x] **Faz 2:** İlişkisel Modeller ve İleri Sorgulama Teknikleri
-- [ ] **Faz 3:** Farklı Veri Setleri İle İlerleme (Şu anki aşama: FinTech & Retail)
-- [ ] **Faz 4:** Power BI ile Dashboard Entegrasyonu (Planlanan)
+*Detayları görmek için proje ismine tıklayabilirsiniz.*
+
+| Proje Adı | Sektör | Veri Kaynağı | Temel Çözüm |
+| :--- | :--- | :--- | :--- |
+| **1. Retail 360** | 🛒 E-Ticaret | `ETRADE4` (SQL DB) | **Müşteri 360 & Lojistik Analizi** <br> *(View, UDF)* |
+| **2. PROMASTER** | 🏭 Tedarik Zinciri | `AdventureWorks`, `Superstore` | **Stok Yönetimi & Zarar Önleme** <br> *(ABC Analizi, KPI)* |
+| **3. FinTech & InsurTech** | 🏦 Banka & Sigorta | `BankChurn`, `Insurance.csv` | **Risk Skorlama & Fraud Tespiti** <br> *(Aktüerya, CRM)* |
 
 ---
+
+## 🏗️ Proje Detayları (Architecture Deep Dive)
+
+<details>
+<summary><h3>🛒 1. Retail 360: Advanced E-Commerce Intelligence (Aktif)</h3></summary>
+
+> **Özet:** Perakende sektöründe "Operasyonel Körlüğü" ortadan kaldıran merkezi raporlama sistemi.
+> **Veri Seti:** `ETRADE4` (Normalize SQL Veritabanı - Users, Orders, Payments, Items).
+
+* **Müşteri 360 (`VW_Customer360`):** Müşterilerin yaşam boyu değerini (CLV), sipariş sıklığını ve son aktivitesini tek satıra indiren özet yapı.
+* **Lojistik Isı Haritası (`VW_CityPerformance`):** `COUNT(DISTINCT)` stratejisi ile adres çoklamasını engelleyerek şehir bazlı ciro ve navlun maliyeti analizi.
+* **Ürün Karnesi (`VW_ProductPerformance`):** Ürünleri ciro katkısına göre "Yıldız Ürün" veya "Zayıf Halka" olarak segmentlere ayıran algoritma.
+* **Fonksiyonel Zeka:** Teslimat gecikmelerini (`fn_CalculateDelay`) ve iş günlerini hesaplayan matematiksel modüller.
+
+</details>
+
+<details>
+<summary><h3>🏭 2. PROMASTER: Supply Chain & Sales Analytics</h3></summary>
+
+> **Özet:** Verimlilik, Stok Yönetimi ve CRM üzerine kurgulanmış kapsamlı veri analizi.
+> **Veri Setleri:** `Superstore Sales.csv`, `AdventureWorks2019.bak`.
+
+* **Zarar Önleme (Loss Prevention):** Kârlılığı negatif olan kategorilerin tespiti.
+* **Stok Yönetimi (ABC Analizi):** Pareto prensibiyle (80/20) stok sınıflandırması.
+* **Tedarikçi Karnesi (Vendor Rating):** Termin süresine uyum (OTIF) puanlaması.
+* **Üretim Darboğaz Analizi (Bottleneck):** Planlanan vs Gerçekleşen süre sapmalarının (Standart Sapma) tespiti.
+
+</details>
+
+<details>
+<summary><h3>🏦 3. FinTech & InsurTech Master Plan</h3></summary>
+
+> **Özet:** Bankacılık ve Sigortacılık verileriyle Risk, Fraud ve Aktüeryal analizler.
+> **Veri Setleri:** `bank.csv`, `german_credit.csv`, `fraud_detection.csv`.
+
+* **Aktüeryal Fiyatlandırma:** Sigara kullanımı ve BMI endeksinin maliyetlere etkisi *(The Smoker Tax)*.
+* **Kredi Risk Skorlama:** Amaç bazlı risk analizi ve sanal skorlama kartı *(Scorecard Simulation)*.
+* **Sigorta Sahteciliği (Fraud):** "Pazartesi Sendromu" ve kaza tarihi manipülasyonlarının tespiti.
+* **Churn Prediction:** Müşteri kaybını önleyici erken uyarı sistemleri.
+
+</details>
+
+---
+
+## 🗺️ Gelişim Yol Haritası (Roadmap)
+
+Bu proje, **Teknik Yetkinlikler** ile **Yönetsel Bakış Açısını** birleştiren 5 fazlı bir yapıdadır.
+
+- [x] **Faz 1: Stratejik Raporlama Katmanı** (Advanced Views) 🟢
+    * *Teknik:* Complex JOINS, CTEs, Window Functions.
+    * *Yönetsel:* KPI Belirleme, Departman Bazlı Raporlama.
+- [ ] **Faz 2: Fonksiyonel Zeka** (User Defined Functions) 🟡 *Devam Ediyor*
+    * *Teknik:* Scalar & Table Valued Functions.
+    * *Yönetsel:* İş Mantığı (Business Logic) Standardizasyonu.
+- [ ] **Faz 3: Operasyonel Bütünlük** (Stored Procedures) 🔴
+    * *Teknik:* ACID Transactions, Error Handling.
+    * *Yönetsel:* İş Akışı (Workflow) Tasarımı.
+- [ ] **Faz 4: Otomasyon & Denetim** (Triggers) 🔴
+    * *Teknik:* Audit Logs, Security Triggers.
+    * *Yönetsel:* İç Denetim ve Güvenlik Politikaları.
+- [ ] **Faz 5: Performans Optimizasyonu** (Tuning) 🔴
+    * *Teknik:* Indexing, Execution Plan Analysis.
+    * *Yönetsel:* Sistem Ölçeklenebilirliği ve Maliyet Yönetimi.
+
+---
+
 <div align="center">
-  👤 <b>İbrahim Türkyılmaz</b> tarafından geliştirilmektedir.<br>
-  📧 İletişim için LinkedIn profilime göz atabilirsiniz.
+  <img src="https://media.giphy.com/media/dummy/giphy.gif" width="0" height="0" /> <i>👨‍💻 <b>İbrahim Türkyılmaz</b> tarafından geliştirilmektedir.</i>
 </div>
