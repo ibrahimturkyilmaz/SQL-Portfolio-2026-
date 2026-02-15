@@ -1,14 +1,14 @@
-/*Trigger çalıştığında SQL hafızasında iki sanal tablo oluşur:
-deleted Tablosu: Silinen veya değiştirilmeden önceki ESKİ veriyi tutar.
-inserted Tablosu: Yeni eklenen veya değiştirilen YENİ veriyi tutar.*/
+/*Trigger Ã§alÃ½Ã¾tÃ½Ã°Ã½nda SQL hafÃ½zasÃ½nda iki sanal tablo oluÃ¾ur:
+deleted Tablosu: Silinen veya deÃ°iÃ¾tirilmeden Ã¶nceki ESKÃ veriyi tutar.
+inserted Tablosu: Yeni eklenen veya deÃ°iÃ¾tirilen YENÃ veriyi tutar.*/
 
 CREATE TABLE PRICE_LOGS
 (
-    LOG_ID INT IDENTITY(1,1) PRIMARY KEY, -- Kayıt numarası
+    LOG_ID INT IDENTITY(1,1) PRIMARY KEY, -- KayÃ½t numarasÃ½
     URUN_ID INT,
     ESKI_FIYAT DECIMAL(18,2),
     YENI_FIYAT DECIMAL(18,2),
-    DEGISTIREN_KISI NVARCHAR(50), -- Kim yaptı?
+    DEGISTIREN_KISI NVARCHAR(50), -- Kim yaptÃ½?
     DEGISIM_TARIHI DATETIME DEFAULT GETDATE()
 )
 
@@ -17,15 +17,15 @@ ON dbo.ITEMS
 AFTER UPDATE
 AS
 BEGIN
-    -- Sadece Fiyat (PRICE) değiştiyse çalış, diğer güncellemeleri (stok vs) görmezden gel
+    -- Sadece Fiyat (PRICE) deÃ°iÃ¾tiyse Ã§alÃ½Ã¾, diÃ°er gÃ¼ncellemeleri (stok vs) gÃ¶rmezden gel
     IF UPDATE(UNITPRICE)
     BEGIN
         INSERT INTO dbo.PRICE_LOGS (URUN_ID, ESKI_FIYAT, YENI_FIYAT, DEGISTIREN_KISI, DEGISIM_TARIHI)
         SELECT 
             i.ID, 
-            d.UNITPRICE,  -- deleted tablosundaki ESKİ fiyat
-            i.UNITPRICE,  -- inserted tablosundaki YENİ fiyat
-            SYSTEM_USER, -- SQL'e o an bağlı olan kullanıcı (Senin Bilgisayar Adın)
+            d.UNITPRICE,  -- deleted tablosundaki ESKÃ fiyat
+            i.UNITPRICE,  -- inserted tablosundaki YENÃ fiyat
+            SYSTEM_USER, -- SQL'e o an baÃ°lÃ½ olan kullanÃ½cÃ½ (Senin Bilgisayar AdÃ½n)
             GETDATE()
         FROM 
             inserted i
@@ -38,16 +38,16 @@ UPDATE dbo.ITEMS SET UNITPRICE = 999 WHERE ID = 1;
 SELECT * FROM dbo.PRICE_LOGS ORDER BY DEGISIM_TARIHI DESC;
 
 
-/*Senaryo: Bir ürünün stoğu kritik seviyenin (örneğin 10 adet) altına düştüğünde, 
-depo sorumlusunun fark etmesini beklemeden sistem otomatik olarak "Satın Alma Talebi" oluştursun.
-Buna "Reorder Point" (Yeniden Sipariş Noktası) otomasyonu denir.*/
+/*Senaryo: Bir Ã¼rÃ¼nÃ¼n stoÃ°u kritik seviyenin (Ã¶rneÃ°in 10 adet) altÃ½na dÃ¼Ã¾tÃ¼Ã°Ã¼nde, 
+depo sorumlusunun fark etmesini beklemeden sistem otomatik olarak "SatÃ½n Alma Talebi" oluÃ¾tursun.
+Buna "Reorder Point" (Yeniden SipariÃ¾ NoktasÃ½) otomasyonu denir.*/
 
 CREATE TABLE SATIN_ALMA_TALEPLERI
 (
     TALEP_ID INT IDENTITY(1,1) PRIMARY KEY,
     URUN_ID INT,
     TALEP_TARIHI DATETIME DEFAULT GETDATE(),
-    DURUM NVARCHAR(20) DEFAULT 'BEKLIYOR', -- Bekliyor, Sipariş Verildi
+    DURUM NVARCHAR(20) DEFAULT 'BEKLIYOR', -- Bekliyor, SipariÃ¾ Verildi
     ACIKLAMA NVARCHAR(100)
 )
 CREATE TRIGGER trg_StokAlarm
@@ -55,25 +55,25 @@ ON dbo.ITEMS
 AFTER UPDATE
 AS
 BEGIN
-    -- Sadece STOK (STOCKAMOUNT) değiştiyse çalış
+    -- Sadece STOK (STOCKAMOUNT) deÃ°iÃ¾tiyse Ã§alÃ½Ã¾
     IF UPDATE(STOCKAMOUNT)
     BEGIN
         DECLARE @YeniStok INT;
         DECLARE @UrunID INT;
 
-        -- Değişen veriyi 'inserted' tablosundan al
+        -- DeÃ°iÃ¾en veriyi 'inserted' tablosundan al
         SELECT @UrunID = ID, @YeniStok = STOCKAMOUNT FROM inserted;
 
-        -- KRİTİK KONTROL: Stok 10'un altına düştü mü?
+        -- KRÃTÃK KONTROL: Stok 10'un altÃ½na dÃ¼Ã¾tÃ¼ mÃ¼?
         IF @YeniStok <= 10
         BEGIN
-            -- Daha önce bekleyen bir talep yoksa yeni talep aç (Mükerrer kaydı önle)
+            -- Daha Ã¶nce bekleyen bir talep yoksa yeni talep aÃ§ (MÃ¼kerrer kaydÃ½ Ã¶nle)
             IF NOT EXISTS (SELECT * FROM dbo.SATIN_ALMA_TALEPLERI WHERE URUN_ID = @UrunID AND DURUM = 'BEKLIYOR')
             BEGIN
                 INSERT INTO dbo.SATIN_ALMA_TALEPLERI (URUN_ID, ACIKLAMA)
-                VALUES (@UrunID, 'DİKKAT! Stok Kritik Seviyede (' + CAST(@YeniStok AS NVARCHAR(10)) + ' adet)');
+                VALUES (@UrunID, 'DÃKKAT! Stok Kritik Seviyede (' + CAST(@YeniStok AS NVARCHAR(10)) + ' adet)');
                 
-                PRINT 'ALARM: Stok azaldı! Otomatik satın alma talebi oluşturuldu.';
+                PRINT 'ALARM: Stok azaldÃ½! Otomatik satÃ½n alma talebi oluÃ¾turuldu.';
             END
         END
     END
@@ -105,25 +105,25 @@ BEGIN
     DECLARE @SiparisID INT;
     DECLARE @MusteriID INT;
 
-    -- Yeni eklenen kaydı 'inserted' sanal tablosundan al
+    -- Yeni eklenen kaydÃ½ 'inserted' sanal tablosundan al
     SELECT 
         @SiparisID = ID, 
         @MusteriID = USERID, 
         @YeniTutar = TOTALPRICE 
     FROM inserted;
 
-    -- KONTROL: Tutar 5000 TL'den büyük mü?
+    -- KONTROL: Tutar 5000 TL'den bÃ¼yÃ¼k mÃ¼?
     IF @YeniTutar > 5000
     BEGIN
-        -- CEO_ALERTS tablosuna kayıt at
+        -- CEO_ALERTS tablosuna kayÃ½t at
         INSERT INTO dbo.CEO_ALERTS (SIPARIS_ID, MUSTERI_ID, TUTAR, MESAJ)
-        VALUES (@SiparisID, @MusteriID, @YeniTutar, ' TEBRİKLER! Yüksek cirolu yeni bir satış gerçekleşti.');
+        VALUES (@SiparisID, @MusteriID, @YeniTutar, ' TEBRÃKLER! YÃ¼ksek cirolu yeni bir satÃ½Ã¾ gerÃ§ekleÃ¾ti.');
         
-        PRINT 'ALARM: Yüksek tutarlı sipariş yakalandı! CEO bilgilendirildi.';
+        PRINT 'ALARM: YÃ¼ksek tutarlÃ½ sipariÃ¾ yakalandÃ½! CEO bilgilendirildi.';
     END
 END
 
--- 7500 TL'lik sahte bir sipariş oluşturalım
+-- 7500 TL'lik sahte bir sipariÃ¾ oluÃ¾turalÃ½m
 INSERT INTO dbo.ORDERS (USERID, DATE_, TOTALPRICE, STATUS_)
 VALUES (1, GETDATE(), 7500, 1);
 
@@ -131,7 +131,7 @@ SELECT * FROM dbo.CEO_ALERTS ORDER BY OLUSTURMA_TARIHI DESC;
 
 --kskt trjj mxef nxad
 
--- Önce temizlik yapalım (Eğer eski denemeler varsa siler)
+-- Ã–nce temizlik yapalÃ½m (EÃ°er eski denemeler varsa siler)
 IF EXISTS (SELECT * FROM msdb.dbo.sysmail_account WHERE name = 'GmailHesabi')
 BEGIN
     EXEC msdb.dbo.sysmail_delete_account_sp @account_name = 'GmailHesabi';
@@ -142,78 +142,78 @@ BEGIN
     EXEC msdb.dbo.sysmail_delete_profile_sp @profile_name = 'SirketBildirimProfili';
 END
 
--- A. HESAP OLUŞTUR (Gmail SMTP Ayarları)
--- DİKKAT: @password kısmına Gmail'den aldığın 16 haneli kodu yaz!
+-- A. HESAP OLUÃTUR (Gmail SMTP AyarlarÃ½)
+-- DÃKKAT: @password kÃ½smÃ½na Gmail'den aldÃ½Ã°Ã½n 16 haneli kodu yaz!
 EXEC msdb.dbo.sysmail_add_account_sp
     @account_name = 'GmailHesabi',
-    @email_address = 'ibrahimtrkylmz632@gmail.com',  -- <--- BURAYI DEĞİŞTİR
+    @email_address = '',  -- <--- BURAYI DEÃÃÃTÃR
     @display_name = 'SQL Server Robotu',
     @mailserver_name = 'smtp.gmail.com',
     @port = 587,
     @enable_ssl = 1,
-    @username = 'ibrahimtrkylmz632@gmail.com',       -- <--- BURAYI DEĞİŞTİR
-    @password = 'kskt trjj mxef nxad';          -- <--- GMAIL UYGULAMA ŞİFRESİ
+    @username = '',       -- <--- BURAYI DEÃÃÃTÃR
+    @password = '';          -- <--- GMAIL UYGULAMA ÃÃFRESÃ
 
--- B. PROFİL OLUŞTUR (Mail atan kimlik)
+-- B. PROFÃL OLUÃTUR (Mail atan kimlik)
 EXEC msdb.dbo.sysmail_add_profile_sp
     @profile_name = 'SirketBildirimProfili',
-    @description = 'Yöneticilere bildirim atmak için kullanılır.';
+    @description = 'YÃ¶neticilere bildirim atmak iÃ§in kullanÃ½lÃ½r.';
 
--- C. HESABI PROFİLE BAĞLA
+-- C. HESABI PROFÃLE BAÃLA
 EXEC msdb.dbo.sysmail_add_profileaccount_sp
     @profile_name = 'SirketBildirimProfili',
     @account_name = 'GmailHesabi',
     @sequence_number = 1;
 
--- D. TEST MAİLİ AT (Çalışıyor mu?)
+-- D. TEST MAÃLÃ AT (Ã‡alÃ½Ã¾Ã½yor mu?)
 EXEC msdb.dbo.sp_send_dbmail
     @profile_name = 'SirketBildirimProfili',
-    @recipients = 'ibrahimtrkylmz632@gmail.com', -- Kendi mailine gönder
-    @subject = 'SQL Test Mesajı',
-    @body = 'Merhaba, bu mesaj SQL Server üzerinden başarıyla gönderildi! ';
+    @recipients = '', -- Kendi mailine gÃ¶nder
+    @subject = 'SQL Test MesajÃ½',
+    @body = 'Merhaba, bu mesaj SQL Server Ã¼zerinden baÃ¾arÃ½yla gÃ¶nderildi! ';
 
     ALTER TRIGGER trg_YuksekTutar
 ON dbo.ORDERS
 AFTER INSERT
 AS
 BEGIN
-    -- Değişkenler
+    -- DeÃ°iÃ¾kenler
     DECLARE @YeniTutar DECIMAL(18,2);
     DECLARE @SiparisID INT;
     DECLARE @MusteriID INT;
-    DECLARE @MailIcerigi NVARCHAR(MAX); -- HTML formatında mail metni
+    DECLARE @MailIcerigi NVARCHAR(MAX); -- HTML formatÃ½nda mail metni
 
     -- Yeni eklenen veriyi al
     SELECT @SiparisID = ID, @MusteriID = USERID, @YeniTutar = TOTALPRICE 
     FROM inserted;
 
-    -- KONTROL: Tutar 5000 TL'den büyük mü?
+    -- KONTROL: Tutar 5000 TL'den bÃ¼yÃ¼k mÃ¼?
     IF @YeniTutar > 5000
     BEGIN
         -- 1. Tabloya Log At (Yedekleme)
         INSERT INTO dbo.CEO_ALERTS (SIPARIS_ID, MUSTERI_ID, TUTAR, MESAJ)
-        VALUES (@SiparisID, @MusteriID, @YeniTutar, 'Mail Gönderildi.');
+        VALUES (@SiparisID, @MusteriID, @YeniTutar, 'Mail GÃ¶nderildi.');
 
-        -- 2. Mail İçeriğini HTML Olarak Hazırla
+        -- 2. Mail ÃÃ§eriÃ°ini HTML Olarak HazÃ½rla
         SET @MailIcerigi = '
             <html>
             <body>
-                <h2 style="color:green;"> Yeni Bir Yüksek Satış!</h2>
-                <p>Sayın Yönetici, az önce sistemde büyük bir işlem gerçekleşti.</p>
+                <h2 style="color:green;"> Yeni Bir YÃ¼ksek SatÃ½Ã¾!</h2>
+                <p>SayÃ½n YÃ¶netici, az Ã¶nce sistemde bÃ¼yÃ¼k bir iÃ¾lem gerÃ§ekleÃ¾ti.</p>
                 <table border="1">
-                    <tr><td><b>Sipariş No</b></td><td>' + CAST(@SiparisID AS NVARCHAR) + '</td></tr>
-                    <tr><td><b>Müşteri ID</b></td><td>' + CAST(@MusteriID AS NVARCHAR) + '</td></tr>
+                    <tr><td><b>SipariÃ¾ No</b></td><td>' + CAST(@SiparisID AS NVARCHAR) + '</td></tr>
+                    <tr><td><b>MÃ¼Ã¾teri ID</b></td><td>' + CAST(@MusteriID AS NVARCHAR) + '</td></tr>
                     <tr><td><b>Tutar</b></td><td>' + CAST(@YeniTutar AS NVARCHAR) + ' TL</td></tr>
                 </table>
-                <p><i>İyi çalışmalar,<br>SQL Server Botu</i></p>
+                <p><i>Ãyi Ã§alÃ½Ã¾malar,<br>SQL Server Botu</i></p>
             </body>
             </html>';
 
-        -- 3. MAİLİ GÖNDER
+        -- 3. MAÃLÃ GÃ–NDER
         EXEC msdb.dbo.sp_send_dbmail
             @profile_name = 'SirketBildirimProfili',
-            @recipients = 'ibrahimtrkylmz632@gmail.com', -- CEO'nun mail adresi (Senin mailin olsun şimdilik)
-            @subject = ' Yüksek Ciro Alarmı!',
+            @recipients = '', -- CEO'nun mail adresi (Senin mailin olsun Ã¾imdilik)
+            @subject = ' YÃ¼ksek Ciro AlarmÃ½!',
             @body = @MailIcerigi,
             @body_format = 'HTML';
     END
